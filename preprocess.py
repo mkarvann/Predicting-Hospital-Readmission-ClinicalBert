@@ -5,7 +5,7 @@ import re
 from tqdm import tqdm
 
 # Load and preprocess ADMISSIONS data
-df_adm = pd.read_csv('clinicalbert/ADMISSIONS_sorted.csv')
+df_adm = pd.read_csv('ADMISSIONS_sorted.csv')
 df_adm.ADMITTIME = pd.to_datetime(df_adm.ADMITTIME, format='%Y-%m-%d %H:%M:%S', errors='coerce')
 df_adm.DISCHTIME = pd.to_datetime(df_adm.DISCHTIME, format='%Y-%m-%d %H:%M:%S', errors='coerce')
 df_adm.DEATHTIME = pd.to_datetime(df_adm.DEATHTIME, format='%Y-%m-%d %H:%M:%S', errors='coerce')
@@ -31,7 +31,7 @@ df_adm = df_adm[df_adm.DEATHTIME.isnull()]
 df_adm['DURATION'] = (df_adm['DISCHTIME'] - df_adm['ADMITTIME']).dt.total_seconds() / (24 * 60 * 60)
 
 # Load and preprocess NOTEEVENTS data
-df_notes = pd.read_csv('clinicalbert/NOTEEVENTS_sorted.csv')
+df_notes = pd.read_csv('NOTEEVENTS_sorted.csv')
 df_notes = df_notes.sort_values(by=['SUBJECT_ID', 'HADM_ID', 'CHARTDATE'])
 df_adm_notes = pd.merge(
     df_adm[
